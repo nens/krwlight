@@ -14,8 +14,9 @@
 
     <!-- Site-wide css/js for the head -->
     {% include "krwlight/head-include.html" %}
-    {# TODO: block for per-template head-js-css #}
-
+    <!-- Per-template block for in-the-head js/css -->
+    {% block head %}
+    {% endblock head %}
 
   </head>
   <body>
@@ -25,6 +26,8 @@
 
     <!-- Site-wide js for at the end of the body -->
     {% include "krwlight/body-include.html" %}
-    {# TODO: block for per-template body-js-css #}
+    <!-- Per-template block for in-the-head js/css -->
+    {% block body-js %}
+    {% endblock body-js %}
   </body>
 </html>
