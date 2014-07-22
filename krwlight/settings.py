@@ -154,12 +154,6 @@ MEDIA_URL = '/media/'
 # "{{ MEDIA_URL }}mypackage/my.css".
 STATIC_URL = '/static_media/'
 
-STATICFILES_FINDERS = (
-    'staticfiles.finders.FileSystemFinder',
-    'staticfiles.finders.AppDirectoriesFinder',
-    # Enable support for django-compressor.
-    'compressor.finders.CompressorFinder',
-    )
 STATICFILES_DIRS = [
     os.path.join(BUILDOUT_DIR, 'bower_components'),
     # ^^^ bower-managed files.
@@ -190,6 +184,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     'gunicorn',
 )
 
