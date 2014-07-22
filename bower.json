@@ -3,12 +3,14 @@
     "version": "0.1dev",
     "homepage": "https://github.com/nens/krwlight",
     "authors": [
-        "TODO <TODO@nelen-schuurmans.nl>"
+        "Reinout van Rees <reinout.vanrees@nelen-schuurmans.nl>"
     ],
     "license": "GPL",
     "private": true,
     "dependencies": {
-
+        "bootstrap": "3.2.0",
+        "jquery": "2.1.1",
+        "fira": "0.1.0"
     },
     "ignore": [
         "**/.*",
