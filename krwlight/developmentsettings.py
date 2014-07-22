@@ -1,7 +1,4 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.rst.
-
-from lizard_ui.settingshelper import setup_logging
-
 from krwlight.settings import *
 
 DEBUG = True
