@@ -4,7 +4,7 @@ from krwlight.settings import *
 DEBUG = True
 
 LOGGING['loggers']['']['level'] = DEBUG
-RAVEN_CONFIG = None
+RAVEN_CONFIG = {}
 
 
 try:
