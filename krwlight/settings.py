@@ -112,7 +112,7 @@ MANAGERS = ADMINS
 # In case of geodatabase, prepend with: django.contrib.gis.db.backends.(postgis)
 DATABASES = {
     'default': {
-        'NAME': os.path.join(BUILDOUT_DIR, 'var/db/krwlight.db'),
+        'NAME': os.path.join(BUILDOUT_DIR, 'var/sqlite/krwlight.db'),
         'ENGINE': 'django.db.backends.sqlite3',
         }
     }
@@ -183,8 +183,6 @@ CACHES = {
 INSTALLED_APPS = (
     'krwlight',
     'south',
-    'compressor',
-    'staticfiles',
     'raven.contrib.django.raven_compat',
     'django_extensions',
     'django.contrib.admin',
