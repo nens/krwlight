@@ -180,27 +180,8 @@ CACHES = {
     }
 }
 
-MIDDLEWARE_CLASSES = (
-    # Below is the default list, don't modify it.
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    # Lizard security.
-    'tls.TLSRequestMiddleware',
-    'lizard_security.middleware.SecurityMiddleware',
-    )
-
 INSTALLED_APPS = (
     'krwlight',
-    # lizard_maptree and lizard_wms are included for demo purposes. Almost
-    # every site needs them, but you're free to remove them if unneeded.
-    'lizard_maptree',
-    'lizard_wms',
-    'lizard_map',
-    'lizard_ui',
-    'lizard_security',
     'south',
     'compressor',
     'staticfiles',

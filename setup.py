@@ -9,20 +9,14 @@ long_description = '\n\n'.join([
     ])
 
 install_requires = [
+    # 'lizard-ui',
     'Django',
-    'django-celery',
     'django-extensions',
     'django-nose',
     'gunicorn',
-    'lizard-map',
-    'lizard-ui',
     'python-memcached',
     'raven',
     'werkzeug',
-    # Maptree and wms are included for demo purposes; almost every site needs
-    # them anyway.
-    'lizard-maptree',
-    'lizard-wms',
     ],
 
 tests_require = [
@@ -33,15 +27,15 @@ tests_require = [
 
 setup(name='krwlight',
       version=version,
-      description="TODO",
+      description="Simple light-weight KRW demo",
       long_description=long_description,
       # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=['Programming Language :: Python',
                    'Framework :: Django',
                    ],
       keywords=[],
-      author='TODO',
-      author_email='TODO@nelen-schuurmans.nl',
+      author='Reinout van Rees',
+      author_email='reinout.vanrees@nelen-schuurmans.nl',
       url='',
       license='GPL',
       packages=['krwlight'],
