@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ view.title|default:"Lizard"  }}</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Site-wide css/js for the head -->
+    {% include "krwlight/head-include.html" %}
+    {# TODO: block for per-template head-js-css #}
+
+
+  </head>
+  <body>
+    {% block body %}
+      <h1>base.html template</h1>
+    {% endblock body %}
+
+    <!-- Site-wide js for at the end of the body -->
+    {% include "krwlight/body-include.html" %}
+    {# TODO: block for per-template body-js-css #}
+  </body>
+</html>
