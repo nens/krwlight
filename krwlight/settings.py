@@ -112,12 +112,8 @@ MANAGERS = ADMINS
 # In case of geodatabase, prepend with: django.contrib.gis.db.backends.(postgis)
 DATABASES = {
     'default': {
-        'NAME': 'krwlight',
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'USER': 'krwlight',
-        'PASSWORD': 'jz%_-2)!kt',
-        'HOST': 'p-web-db-00-d03.external-nens.local',
-        'PORT': '5432',
+        'NAME': os.path.join(BUILDOUT_DIR, 'var/db/krwlight.db'),
+        'ENGINE': 'django.db.backends.sqlite3',
         }
     }
 
