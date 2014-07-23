@@ -16,11 +16,8 @@ urlpatterns = patterns(
     '',
     url(r'^$', views.HomepageView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^something/',
-    #     views.some_method,
-    #     name="name_it"),
-    # url(r'^something_else/$',
-    #     views.SomeClassBasedView.as_view(),
-    #     name='name_it_too'),
+    url(r'^selection/(?P<criterium>[^/]+)/$',
+        views.SelectionView.as_view(),
+        name='krwlight.selection'),
     )
 # TODO: staticfiles

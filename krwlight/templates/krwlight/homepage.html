@@ -14,7 +14,14 @@
       </p>
       <ul>
         <li>
-          <a href="/TODO">Hydrobiologische data</a>
+          Hydrobiologische data
+          <a href="{% url 'krwlight.selection' criterium='location' %}">
+            via locatie
+          </a>
+          of
+          <a href="{% url 'krwlight.selection' criterium='parameter' %}">
+            via waarnemingssoort/parameter
+          </a>
         </li>
         <li>
           Fysisch-chemische data

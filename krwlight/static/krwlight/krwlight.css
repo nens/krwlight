@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    /* background image code mostly copy/pasted from
+       http://bootstraptaste.com/theme/siimple/ */
+    background-color: #444;
+    background: url(background.jpg) no-repeat center top;
+    /* copyright image Reinout van Rees, 2014, cc-by-sa */
+    background-attachment: relative;
+    background-position: center center;
+    width: 100%;
+
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+div.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 100%;
+}
