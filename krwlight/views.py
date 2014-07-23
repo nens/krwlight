@@ -12,6 +12,7 @@ from krwlight import layouts
 
 class HomepageView(TemplateView):
     template_name = 'krwlight/homepage.html'
+    title = "KRW demo"
 
     @property
     def layout(self):
