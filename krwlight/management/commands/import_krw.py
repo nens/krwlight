@@ -14,4 +14,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         import pprint
-        pprint.pprint(data.location_tree())
+        pprint.pprint(data.parameter_tree())

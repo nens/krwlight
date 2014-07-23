@@ -1,5 +1,6 @@
 # File for data imports from csv.
 # Quick&dirty.
+from collections import defaultdict
 import glob
 import logging
 import os
@@ -29,7 +30,6 @@ def load_csv_data(limit_to=None):
 
 
 def location_tree():
-    """Return nested list with id/name pairs of locations"""
     locations = load_csv_data('locaties')['locaties']
     waarnemingen = load_csv_data('waarneming')['waarneming']
     krw = {'id': 'KRW',
@@ -63,42 +63,34 @@ def location_tree():
     return [krw, meetnet]
 
 
-# def location_tree():
-#     """Return nested list with id/name pairs of locations"""
-#     locations = load_csv_data('locaties')['locaties']
-#     krw = {'id': 'KRW',
-#            'title': 'KRW locaties',
-#            'has_children': True,
-#            'level': 1,
-#            'children': []}
-#     meetnet = {'id': 'MEETNET',
-#                'title': 'Roulerend meetnet locaties',
-#                'has_children': True,
-#                'level': 1,
-#                'children': []}
-#     project = {'id': 'PROJECT',
-#                'title': 'Projectlocaties',
-#                'has_children': True,
-#                'level': 1,
-#                'children': []}
-#     for location in locations:
-#         id = location['LOC_NAME']
-#         title = location['Locatiebeschrijving'] or id
-#         node = {'id': id,
-#                 'title': title,
-#                 'has_children': False,
-#                 'level': 2,
-#                 'children': []}
-#         if location['KRW_Waterlichaam']:
-#             krw['children'].append(node)
-#         if location['Roulerend_Meetnet']:
-#             meetnet['children'].append(node)
-#         if not (location['KRW_Waterlichaam'] or
-#                 location['Roulerend_Meetnet']):
-#             project['children'].append(node)
-#     result = {'id': 'ROOT',
-#               'title': 'Alle locaties',
-#               'has_children': True,
-#               'level': 0,
-#               'children': [krw, meetnet, project]}
-#     return result
+def parameter_tree():
+    waarnemingssoorten = load_csv_data('waarnemingsoort')['waarnemingsoort']
+    # Note: typo in 'waarnemingsoort' in the csv.
+
+    waarnemingssoort_per_biotaxon = defaultdict(list)
+    for waarnemingssoort in waarnemingssoorten:
+        waarnemingssoort_per_biotaxon[
+            waarnemingssoort['Biotaxon']].append(waarnemingssoort)
+
+    biotaxons = load_csv_data('biotaxon')['biotaxon']
+    parents = defaultdict(list)
+    for biotaxon in biotaxons:
+        id = biotaxon['Biotaxon']
+        parents[biotaxon['parentname']].append(id)
+
+    def children(id):
+        child_list = []
+        parent = parents[id]
+        for child_id in parent:
+            child = {'id': child_id,
+                     'children': children(child_id)}
+            child_list.append(child)
+        return child_list
+
+    result = {'id': '',
+              'children': children('')}
+    logger.debug("Calculated it all")
+
+
+    # waarnemingen = load_csv_data('waarneming')['waarneming']
+    return dict(result)
