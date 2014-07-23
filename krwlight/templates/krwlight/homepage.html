@@ -1,5 +1,31 @@
 {% extends view.layout.base_template %}
 {% load static %}
+
 {% block head %}
   <link href="{% static 'krwlight/homepage.css' %}" rel="stylesheet">
 {% endblock head %}
+
+{% block body %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>KRW demo</h1>
+      <p>
+        Welke dataset wil je benaderen?
+      </p>
+      <ul>
+        <li>
+          <a href="/TODO">Hydrobiologische data</a>
+        </li>
+        <li>
+          Fysisch-chemische data
+        </li>
+        <li>
+          Ecoscans
+        </li>
+        <li>
+          Biologie op keringen
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock body %}

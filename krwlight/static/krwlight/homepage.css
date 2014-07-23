@@ -1,9 +1,9 @@
 body {
+    /* background image code mostly copy/pasted from
+       http://bootstraptaste.com/theme/siimple/ */
     background-color: #444;
     background: url(background.jpg) no-repeat center top;
     /* copyright image Reinout van Rees, 2014, cc-by-sa */
-    margin-top: -20px;
-    padding-top: 150px;
     background-attachment: relative;
     background-position: center center;
     min-height: 650px;
@@ -18,4 +18,13 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+div.container {
+    background-color: transparent;
+}
+
+div.jumbotron {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-top: 4em;
 }
