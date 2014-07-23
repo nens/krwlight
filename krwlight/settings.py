@@ -26,6 +26,8 @@ SETTINGS_DIR = os.path.dirname(os.path.realpath(__file__))
 # to place all collected static files.
 BUILDOUT_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, '..'))
 
+CSV_ROOT = os.path.join(BUILDOUT_DIR, 'var', 'csv')
+
 # Set up logging. No console logging. By default, var/log/django.log and
 # sentry at 'WARN' level.
 LOGGING = {

@@ -2,15 +2,33 @@
 {% load static %}
 
 {% block body %}
-  <div class="container">
+  <div class="container"
+       id="main-container">
     <p>
       <a href="/">
         &larr; Home
       </a>
     </p>
     <h1>{{ view.title }}</h1>
-    <p>
-      TODO boomstructuur enzo
-    </p>
+
+    {% for root in view.tree %}
+      <h2>{{ root.title }}</h2>
+      {% if root.children %}
+        <ul>
+          {% for node in root.children %}
+            <li>
+              <a href="#{{ node.id }}">
+                {{ node.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>
+          Geen locaties beschikbaar.
+        </p>
+      {% endif %}
+
+    {% endfor %}
   </div>
 {% endblock body %}

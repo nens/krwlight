@@ -7,7 +7,7 @@ from __future__ import print_function
 from django.utils.functional import cached_property
 from django.views.generic.base import TemplateView
 
-# from krwlight import models
+from krwlight import data
 from krwlight import layouts
 
 
@@ -42,3 +42,9 @@ class SelectionView(TemplateView):
     @cached_property
     def layout(self):
         return layouts.BaseLayout(self)
+
+
+    @cached_property
+    def tree(self):
+        if self.criterium == 'location':
+            return data.location_tree()
