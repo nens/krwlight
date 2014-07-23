@@ -38,9 +38,9 @@ def location_tree():
     meetnet = {'id': 'MEETNET',
                'title': 'Roulerend meetnet locaties',
                'children': []}
-    project = {'id': 'PROJECT',
-               'title': 'Projectlocaties',
-               'children': []}
+    # project = {'id': 'PROJECT',
+    #            'title': 'Projectlocaties',
+    #            'children': []}
     for location in locations:
         id = location['LOC_NAME']
         if not id:
@@ -57,10 +57,10 @@ def location_tree():
             krw['children'].append(node)
         if location['Roulerend_Meetnet']:
             meetnet['children'].append(node)
-        if not (location['KRW_Waterlichaam'] or
-                location['Roulerend_Meetnet']):
-            project['children'].append(node)
-    return [krw, meetnet, project]
+        # if not (location['KRW_Waterlichaam'] or
+        #         location['Roulerend_Meetnet']):
+        #     project['children'].append(node)
+    return [krw, meetnet]
 
 
 # def location_tree():
