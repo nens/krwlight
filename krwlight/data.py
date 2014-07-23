@@ -21,8 +21,9 @@ def load_csv_data(limit_to=None):
                 logger.debug("Skipping %s", filename)
                 continue
         logger.debug("Importing %s", filename)
-        lines = list(
-            csv.DictReader(open(csv_filepath), delimiter=';'))
+        reader = csv.DictReader(open(csv_filepath), delimiter=';')
+        # print reader.fieldnames
+        lines = list(reader)
         result[filename] = lines
     return result
 
@@ -30,6 +31,7 @@ def load_csv_data(limit_to=None):
 def location_tree():
     """Return nested list with id/name pairs of locations"""
     locations = load_csv_data('locaties')['locaties']
+    waarnemingen = load_csv_data('waarneming')['waarneming']
     krw = {'id': 'KRW',
            'title': 'KRW locaties',
            'children': []}
@@ -44,8 +46,12 @@ def location_tree():
         if not id:
             continue
         title = location['Locatiebeschrijving'] or id
+        num_results = len(
+            [waarneming for waarneming in waarnemingen
+             if waarneming['Locatie'] == id])
         node = {'id': id,
                 'title': title,
+                'num_results': num_results,
                 'children': []}
         if location['KRW_Waterlichaam']:
             krw['children'].append(node)

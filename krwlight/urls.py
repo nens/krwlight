@@ -19,5 +19,8 @@ urlpatterns = patterns(
     url(r'^selection/(?P<criterium>[^/]+)/$',
         views.SelectionView.as_view(),
         name='krwlight.selection'),
+    url(r'^download/$',
+        views.CsvDownloadView.as_view(),
+        name='krwlight.download'),
     )
 # TODO: staticfiles

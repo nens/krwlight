@@ -17,9 +17,13 @@
         <ul>
           {% for node in root.children %}
             <li>
-              <a href="#{{ node.id }}">
+              {% if node.num_results %}
+                <a href="{% url 'krwlight.download' %}?{{ view.criterium }}={{ node.id }}">
+                  {{ node.title }}
+                </a>
+              {% else %}
                 {{ node.title }}
-              </a>
+              {% endif %}
             </li>
           {% endfor %}
         </ul>
