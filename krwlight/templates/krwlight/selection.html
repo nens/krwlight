@@ -28,6 +28,42 @@
                     <span class="text-muted">{{ node.title }}</span>
                   {% endif %}
                 </li>
+
+                  {% if node.children %}
+                    <ul>
+                      {% for subnode in node.children %}
+                        <li>
+                          {% if subnode.num_results %}
+                            <a href="{% url 'krwlight.download' %}?{{ view.criterium }}={{ subnode.id }}">
+                              {{ subnode.title }}
+                            </a>
+                            <span class="badge">{{ subnode.num_results }}</span>
+                          {% else %}
+                            <span class="text-muted">{{ subnode.title }}</span>
+                          {% endif %}
+                        </li>
+
+                          {% if subnode.children %}
+                            <ul>
+                              {% for subsubnode in subnode.children %}
+                                <li>
+                                  {% if subsubnode.num_results %}
+                                    <a href="{% url 'krwlight.download' %}?{{ view.criterium }}={{ subsubnode.id }}">
+                                      {{ subsubnode.title }}
+                                    </a>
+                                    <span class="badge">{{ subsubnode.num_results }}</span>
+                                  {% else %}
+                                    <span class="text-muted">{{ subsubnode.title }}</span>
+                                  {% endif %}
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          {% endif %}
+
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+
               {% endfor %}
             </ul>
           {% else %}

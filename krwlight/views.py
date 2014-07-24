@@ -47,11 +47,12 @@ class SelectionView(TemplateView):
     def layout(self):
         return layouts.BaseLayout(self)
 
-
     @cached_property
     def tree(self):
         if self.criterium == 'location':
             return data.location_tree()
+        if self.criterium == 'parameter':
+            return data.parameter_tree()
 
 
 class CsvDownloadView(TemplateView):
