@@ -100,7 +100,8 @@ def parameter_tree():
 
     for waarnemingssoort in waarnemingssoorten:
         id = waarnemingssoort['Nummer']
-        title = waarnemingssoort['Omschrijving']
+        # title = waarnemingssoort['Omschrijving']
+        title = waarnemingssoort['Biotaxon'] or waarnemingssoort['Omschrijving']
         num_results = len(waarneming_per_waarnemingssoort[id])
         if not num_results:
             continue
@@ -126,7 +127,19 @@ def parameter_tree():
 
     result = [
         {'title': 'Biotaxon',
-         'children': []},
+         'children': [
+             {'title': title,
+              'children': [
+                  {'title': title,
+                   'children': children}
+                  for title, children in level2.items()
+              ]}
+             for title, level2 in tree1.items()
+         ]},
+
+
+
+
         {'title': 'Hoedanigheid',
          'children': [
              {'title': title,

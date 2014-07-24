@@ -73,6 +73,9 @@ class CsvDownloadView(TemplateView):
         if self.filter_on == 'location':
             waarnemingen = [waarneming for waarneming in waarnemingen
                             if waarneming['Locatie'] == self.filter_value]
+        if self.filter_on == 'parameter':
+            waarnemingen = [waarneming for waarneming in waarnemingen
+                            if waarneming['Waarnemingssoort'] == self.filter_value]
         return waarnemingen
 
     @cached_property
