@@ -8,3 +8,5 @@ from krwlight.settings import *
 
 # TODO: add staging gauges ID here.
 UI_GAUGES_SITE_ID = ''  # Staging has a separate one.
+
+ALLOWED_HOSTS = ['krwdemo.staging.lizard.net',]
