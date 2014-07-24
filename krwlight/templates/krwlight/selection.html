@@ -20,7 +20,7 @@
               {% for node in root.children %}
                 <li>
                   {% if node.num_results %}
-                    <a href="{% url 'krwlight.download' %}?{{ view.criterium }}={{ node.id }}">
+                    <a href="{% url 'krwlight.preview' %}?{{ view.criterium }}={{ node.id }}">
                       {{ node.title }}
                     </a>
                     <span class="badge">{{ node.num_results }}</span>
@@ -34,7 +34,7 @@
                       {% for subnode in node.children %}
                         <li>
                           {% if subnode.num_results %}
-                            <a href="{% url 'krwlight.download' %}?{{ view.criterium }}={{ subnode.id }}">
+                            <a href="{% url 'krwlight.preview' %}?{{ view.criterium }}={{ subnode.id }}">
                               {{ subnode.title }}
                             </a>
                             <span class="badge">{{ subnode.num_results }}</span>
@@ -48,7 +48,7 @@
                               {% for subsubnode in subnode.children %}
                                 <li>
                                   {% if subsubnode.num_results %}
-                                    <a href="{% url 'krwlight.download' %}?{{ view.criterium }}={{ subsubnode.id }}">
+                                    <a href="{% url 'krwlight.preview' %}?{{ view.criterium }}={{ subsubnode.id }}">
                                       {{ subsubnode.title }}
                                     </a>
                                     <span class="badge">{{ subsubnode.num_results }}</span>

@@ -22,5 +22,8 @@ urlpatterns = patterns(
     url(r'^download/$',
         views.CsvDownloadView.as_view(),
         name='krwlight.download'),
+    url(r'^preview/$',
+        views.CsvView.as_view(),
+        name='krwlight.preview'),
     )
 # TODO: staticfiles

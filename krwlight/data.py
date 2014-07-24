@@ -130,9 +130,9 @@ def parameter_tree():
          'children': [
              {'title': title,
               'children': [
-                  {'title': title,
+                  {'title': title2,
                    'children': children}
-                  for title, children in level2.items()
+                  for title2, children in level2.items()
               ]}
              for title, level2 in tree1.items()
          ]},

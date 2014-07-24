@@ -1,0 +1,42 @@
+{% extends view.layout.base_template %}
+{% load static %}
+
+{% block body %}
+  <div class="container"
+       id="main-container">
+    <p>
+      <a href="{% url 'krwlight.selection' criterium=view.filter_on %}">
+        &larr; terug
+      </a>
+    </p>
+    <h1>
+      Preview {{ view.title }}.csv
+      <a class="pull-right"
+         title="Download .csv"
+         href="{% url 'krwlight.download' %}?{{ view.request.GET.urlencode }}">
+        <span class="glyphicon glyphicon-download-alt"></span>
+      </a>
+    </h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          {% for cell in view.header_line_for_html %}
+            <th>{{ cell }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for line in view.lines_for_html %}
+          <tr>
+            {% for cell in line %}
+              <td>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+
+{% endblock %}

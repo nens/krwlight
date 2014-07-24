@@ -55,7 +55,12 @@ class SelectionView(TemplateView):
             return data.parameter_tree()
 
 
-class CsvDownloadView(TemplateView):
+class CsvView(TemplateView):
+    template_name = 'krwlight/preview.html'
+
+    @cached_property
+    def layout(self):
+        return layouts.BaseLayout(self)
 
     @cached_property
     def filter_on(self):
@@ -87,6 +92,20 @@ class CsvDownloadView(TemplateView):
         name = ''.join(name)
         name = name.replace(' ', '_')
         return name
+
+    @cached_property
+    def title(self):
+        return self.csv_filename
+
+    def header_line_for_html(self):
+        return WAARNEMING_FIELDNAMES
+
+    def lines_for_html(self):
+        for line in self.lines():
+            yield [line[field] for field in WAARNEMING_FIELDNAMES]
+
+
+class CsvDownloadView(CsvView):
 
     def render_to_response(self, context, **response_kwargs):
         """Return a csv response instead of a rendered template."""
