@@ -13,8 +13,11 @@ from krwlight import data
 from krwlight import layouts
 
 
-WAARNEMING_FIELDNAMES = ['Waarneming', 'Locatie', 'Datum', 'Waarnemingssoort',
-                         'Waarde', 'Activiteit', 'Opmerking']
+WAARNEMING_FIELDNAMES = ['Waarneming', 'Locatie', 'Datum',
+                         'Waarde', 'Activiteit', 'Opmerking',
+                         'Waarnemingssoort']
+EXTRA_FIELDNAMES_FROM_WAARNEMINGSSOORT = ['Parameter', 'Eenheid',
+                                          'Hoedanigheid', 'Biotaxon']
 ALLOWED_CRITERIA = {'location': 'locatie',
                     'parameter': 'waarnemingssoort/parameter'}
 
@@ -57,6 +60,7 @@ class SelectionView(TemplateView):
 
 class CsvView(TemplateView):
     template_name = 'krwlight/preview.html'
+    fields = WAARNEMING_FIELDNAMES + EXTRA_FIELDNAMES_FROM_WAARNEMINGSSOORT
 
     @cached_property
     def layout(self):
@@ -75,12 +79,18 @@ class CsvView(TemplateView):
 
     def lines(self):
         waarnemingen = data.load_csv_data('waarneming')['waarneming']
+        waarnemingssoorten = data.load_csv_data('waarnemingsoort')['waarnemingsoort']
+        waarnemingssoorten = {
+            waarnemingssoort['Nummer']: waarnemingssoort
+            for waarnemingssoort in waarnemingssoorten}
         if self.filter_on == 'location':
             waarnemingen = [waarneming for waarneming in waarnemingen
                             if waarneming['Locatie'] == self.filter_value]
         if self.filter_on == 'parameter':
             waarnemingen = [waarneming for waarneming in waarnemingen
                             if waarneming['Waarnemingssoort'] == self.filter_value]
+        for waarneming in waarnemingen:
+            waarneming.update(waarnemingssoorten[waarneming['Waarnemingssoort']])
         return waarnemingen
 
     @cached_property
@@ -98,11 +108,11 @@ class CsvView(TemplateView):
         return self.csv_filename
 
     def header_line_for_html(self):
-        return WAARNEMING_FIELDNAMES
+        return self.fields
 
     def lines_for_html(self):
         for line in self.lines():
-            yield [line[field] for field in WAARNEMING_FIELDNAMES]
+            yield [line[field] for field in self.fields]
 
 
 class CsvDownloadView(CsvView):
@@ -116,8 +126,9 @@ class CsvDownloadView(CsvView):
 
         # Ideally, use something like .encode('cp1251') somehow somewhere.
         writer = csv.DictWriter(response,
-                                WAARNEMING_FIELDNAMES,
-                                delimiter=b';')
+                                self.fields,
+                                delimiter=b';',
+                                extrasaction='ignore')
         writer.writeheader()
         for line in self.lines():
             writer.writerow(line)
