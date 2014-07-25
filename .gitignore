@@ -45,3 +45,5 @@ local*settings*.py
 
 # Bower files
 bower_components/
+
+htpasswd
