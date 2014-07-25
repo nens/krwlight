@@ -22,5 +22,7 @@ server {
         proxy_set_header Host $http_host;
         proxy_redirect off;
         proxy_pass http://localhost:${serverconfig:gunicorn-port};
+        auth_basic "HDSR demo";
+        auth_basic_user_file ${buildout:directory}/htpasswd;
     }
 }
