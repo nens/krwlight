@@ -66,16 +66,13 @@ def location_tree():
 def parameter_tree():
     tree1 = defaultdict(lambda: defaultdict(list))
     # paramgroup1: paramgroup2: [waarneming, waarneming, waarneming]
-    tree2 = defaultdict(list)
+    tree2 = []
     # hoedanigheid: [waarneming, waarneming, ...]
 
     biotaxons = load_csv_data('biotaxon')['biotaxon']
     waarnemingssoorten = load_csv_data('waarnemingsoort')['waarnemingsoort']
     waarnemingen = load_csv_data('waarneming')['waarneming']
     # Note: typo in 'waarnemingsoort' in the csv.
-    hoedanigheden = load_csv_data('hoedanigheid_ecologie')['hoedanigheid_ecologie']
-    # ^^^ TODO
-
 
     waarneming_per_waarnemingssoort = defaultdict(list)
     for waarneming in waarnemingen:
@@ -90,18 +87,13 @@ def parameter_tree():
             waarnemingssoort['Biotaxon'])
         for waarnemingssoort in waarnemingssoorten}
 
-    levels_per_hoedanigheid = {
-        hoedanigheid['Omschrijving']: hoedanigheid['Groep']
-        for hoedanigheid in hoedanigheden}
-    alternative_levels_per_waarnemingssoort = {
-        waarnemingssoort['Nummer']: levels_per_hoedanigheid.get(
-            waarnemingssoort['Biotaxon'])
-        for waarnemingssoort in waarnemingssoorten}
-
     for waarnemingssoort in waarnemingssoorten:
         id = waarnemingssoort['Nummer']
         # title = waarnemingssoort['Omschrijving']
-        title = waarnemingssoort['Biotaxon'] or waarnemingssoort['Omschrijving']
+        title = (waarnemingssoort['Biotaxon'] or
+                 waarnemingssoort['Omschrijving'])
+        # TODO: biotaxon['localname'] proberen te gebruiken
+
         num_results = len(waarneming_per_waarnemingssoort[id])
         if not num_results:
             continue
@@ -113,8 +105,7 @@ def parameter_tree():
                  'title': title,
                  'num_results': num_results})
         else:
-            level = alternative_levels_per_waarnemingssoort.get(id)
-            tree2[level].append(
+            tree2.append(
                 {'id': id,
                  'title': title,
                  'num_results': num_results})
@@ -123,7 +114,6 @@ def parameter_tree():
     tree1 = dict(tree1)
     for k, subtree in tree1.items():
         tree1[k] = dict(subtree)
-    tree2 = dict(tree2)
 
     result = [
         {'title': 'Biotaxon',
@@ -140,11 +130,7 @@ def parameter_tree():
 
 
 
-        {'title': 'Hoedanigheid',
-         'children': [
-             {'title': title,
-              'children': children}
-             for title, children in tree2.items()
-         ]},
+        {'title': 'Kwaliteitselementen',
+         'children': tree2},
     ]
     return result

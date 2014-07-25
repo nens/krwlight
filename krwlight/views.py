@@ -21,7 +21,7 @@ ALLOWED_CRITERIA = {'location': 'locatie',
 
 class HomepageView(TemplateView):
     template_name = 'krwlight/homepage.html'
-    title = "KRW demo"
+    title = "HDSR demo"
 
     @cached_property
     def layout(self):
@@ -35,7 +35,7 @@ class SelectionView(TemplateView):
 
     @cached_property
     def title(self):
-        return "Selectie op %s - KRW demo" % ALLOWED_CRITERIA[self.criterium]
+        return "Selectie op %s - HDSR demo" % ALLOWED_CRITERIA[self.criterium]
 
     @cached_property
     def criterium(self):
